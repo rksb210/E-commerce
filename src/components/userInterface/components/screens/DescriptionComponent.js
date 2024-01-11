@@ -9,37 +9,40 @@ import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 
-export default function DescriptionComponent(){
+export default function DescriptionComponent(props){
     var classes = useStyles()
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down('md'));
       const matchesSearch = useMediaQuery(theme.breakpoints.down('sm'));
 
+      var item = props.item
+      console.log("itemmmmm:",item)
 
-    var data = [{id:0,image:'oneplus11R.webp',productname:'OnePlus',ram:'8gb',color:'black',rating:4.5,price:'42,000',offerprice:'39,900'},
-                {id:1,image:'oneplus11R 5g.webp',productname:'OnePlus',ram:'12gb',color:'silver',rating:5,price:'55,000',offerprice:'51,999'},
-                {id:1,image:'oneplus11R 5g.webp',productname:'OnePlus',ram:'12gb',color:'silver',rating:5,price:'55,000',offerprice:'51,999'},
-                {id:1,image:'oneplus11R 5g.webp',productname:'OnePlus',ram:'12gb',color:'silver',rating:5,price:'55,000',offerprice:'51,999'},
-                {id:1,image:'oneplus11R 5g.webp',productname:'OnePlus',ram:'12gb',color:'silver',rating:5,price:'55,000',offerprice:'51,999'},]
 
-    const descriptionDetails=()=>{
-        return data.map((item)=>{
+    // var data = [{id:0,image:'oneplus11R.webp',productname:'OnePlus',ram:'8gb',color:'black',rating:4.5,price:'42,000',offerprice:'39,900'},
+    //             {id:1,image:'oneplus11R 5g.webp',productname:'OnePlus',ram:'12gb',color:'silver',rating:5,price:'55,000',offerprice:'51,999'},
+    //             {id:1,image:'oneplus11R 5g.webp',productname:'OnePlus',ram:'12gb',color:'silver',rating:5,price:'55,000',offerprice:'51,999'},
+    //             {id:1,image:'oneplus11R 5g.webp',productname:'OnePlus',ram:'12gb',color:'silver',rating:5,price:'55,000',offerprice:'51,999'},
+    //             {id:1,image:'oneplus11R 5g.webp',productname:'OnePlus',ram:'12gb',color:'silver',rating:5,price:'55,000',offerprice:'51,999'},]
+
+    // const descriptionDetails=()=>{
+        // return data.map((item)=>{
             return (
                 <div>
                     <div style={{display:'flex',marginTop:'25px'}}>
-                    <img src={`${serverURL}/images/${item.image}`} style={{width:matches?'20%':'40%',height:matches?'20%':'40%'}}/>
+                    <img src={`${serverURL}/images/${item.mainpicture}`} style={{width:matches?'20%':'40%',height:matches?'20%':'40%'}}/>
                     <div style={{color:'#fff',fontSize:'24px',marginTop:'18px',width:'100%',marginLeft:'8%'}}>
-                        <div>{`${item.productname} ${item.ram} ${item.color}`}</div>
+                        <div>{`${item.brandname} ${item.productname} ${item.modelnumber}`}</div>
 
-                        <div>
+                        <div style={{display:'flex',flexDirection:'row',gap:'2rem'}}>
                            <span className={classes.description_offer_pink_box}>2000 off on payment otp page</span>
                            <span className={classes.description_offer_pink_box}> 9 month No Cost EMI</span>
                         </div>
                         
-                        <div>
-                        <span style={{color:'#12daa8',fontSize:'16px',}}> {item.rating}<StarIcon style={{fontSize:'14px',margin:'0px 5px 0px 1px'}}/></span>
+                        {/* <div>
+                        <span style={{color:'#12daa8',fontSize:'16px',}}> </span>
                         <span style={{color:'#12daa8',fontSize:'16px',}}>(58 Ratings & 27 Reviews)</span>
-                        </div>
+                        </div> */}
 
                         <div>
                             <span>&#8377;{item.offerprice}</span>
@@ -64,13 +67,13 @@ export default function DescriptionComponent(){
                     <div><hr color='#9a9a9a' size='1'/></div>
                 </div>
             )
-        })
+    //     })
 
        
-    }
-    return (<div>
-        {/* <div><hr color='#9a9a9a' size='1' style={{transform:'rotate(90deg)'}}/></div> */}
-        <div style={{color:'#fff',fontSize:'24px',fontWeight:'bolder'}}>One Plus 11R 8GB</div>
-        <div>{descriptionDetails()}</div>
-    </div>)
+    // }
+    // return (<div>
+    //     {/* <div><hr color='#9a9a9a' size='1' style={{transform:'rotate(90deg)'}}/></div> */}
+    //     <div style={{color:'#fff',fontSize:'24px',fontWeight:'bolder'}}>One Plus 11R 8GB</div>
+    //     <div>{descriptionDetails()}</div>
+    // </div>)
 }

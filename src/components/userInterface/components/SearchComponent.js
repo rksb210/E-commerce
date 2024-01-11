@@ -35,11 +35,29 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Search from '@mui/icons-material/Search';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { useState } from "react";
+import { postData } from "../../../services/FetchNodeServices";
+import { useNavigate } from "react-router-dom";
 
 export default function SearchComponent(props){
+  var navigate = useNavigate()
       const theme = useTheme();
       const matches = useMediaQuery(theme.breakpoints.down('sm'));
       const matchesSearch = useMediaQuery('(max-width:950px)');
+
+      const [text,setText] = useState('')
+      
+
+      const handleSearch =async()=>{
+        var result = await postData('userinterface/product_filter',{text})
+          if(result.status){
+            navigate('/productfilter',{state:{result:result.data}})
+          }
+      }
+
+      
+    
+
         return (
           <div style={{width:'100%'}}>
             <TextField
@@ -47,13 +65,14 @@ export default function SearchComponent(props){
                  hiddenLabel                 
                  placeholder='What are you looking for?'               
                  variant="standard"
+                 onChange={(e)=>setText(e.target.value)}
                  sx={{'& input::placeholder':matchesSearch?{fontSize:13}:{fontSize:15},}}
                  style={{background:'white',borderRadius:5,height:40,paddingLeft:10,display:'flex',justifyContent:'center',}}
                 InputProps={{
                    disableUnderline:true,
                     endAdornment: (
                       <InputAdornment position="end">
-                        <Search />
+                        <Search onClick={handleSearch} style={{cursor:'pointer'}}/>
                       </InputAdornment>
                     ),
                   }}

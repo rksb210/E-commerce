@@ -6,13 +6,23 @@ import { useStyles } from "./ProjectCss";
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import FilterBarComponent from "./filterby/FilterBarComponent";
+import { useLocation } from "react-router-dom";
 
 
 export default function ProductFilterComponent(){
+  var location = useLocation()
+  var data = location?.state?.result
+  console.log("data:",data)
     var classes = useStyles()
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down('md'));
       const matchesSearch = useMediaQuery(theme.breakpoints.down('sm'));
+
+      const showProduct=()=>{
+        return data.map((item)=>{
+          return <DescriptionComponent item={item} />
+        })
+      }
 
     return (<div>
         <div className={classes.home_root} >
@@ -25,10 +35,10 @@ export default function ProductFilterComponent(){
 
              {matches?<></>:<span><FilterByComponent /></span>}
              </div>
-             <span  style={{margin:matches?'0px':'2% 0 0 5%'}}><DescriptionComponent /></span>
-             
+             <span  style={{margin:matches?'0px':'2% 0 0 5%'}}>{showProduct()}</span>
+              
              </div>
-
+             
              {matches?
                <div style={{position:'sticky',bottom:0,zIndex:2}}><FilterBarComponent /></div>
                :<></>

@@ -72,6 +72,7 @@ export default function CheckoutComponent(props) {
             else{
               alert('not submitted')
             }
+            navigate('/home')
           },
           prefill: {
             name: userData?.username,
